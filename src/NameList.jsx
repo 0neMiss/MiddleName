@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-function NameList({ names, setSelectedIndex }) {
-  const [localNames, setLocalNames] = useState(names);
-
-  useEffect(() => {
-    setLocalNames(names);
-  }, [JSON.stringify(names), names]);
-  const items = localNames.map((item, index) => {
+function NameList({ names, setSelectedIndex, selectedIndex }) {
+  const items = names.map((item, index) => {
     return (
       <li
-        onClick={() => setSelectedIndex(index)}
+        style={
+          selectedIndex === index
+            ? { color: "red", cursor: "pointer" }
+            : { cursor: "pointer" }
+        }
+        onClick={(e) => {
+          e.preventDefault();
+          if (index === selectedIndex) {
+            setSelectedIndex(null);
+          } else {
+            setSelectedIndex(index);
+          }
+        }}
         key={`${index}${item.middleName}`}
       >
         {`${item.firstName} ${item.middleName} ${item.lastName}`}

@@ -9,21 +9,19 @@ function App({ data }) {
     setMiddleName(e.target.value);
   };
   const handleSubmit = () => {
-    console.log(selectedIndex);
     const newName = { ...names[selectedIndex], middleName: middleName };
     const newNames = [...names];
     newNames[selectedIndex] = newName;
     setNames(newNames);
     setMiddleName("");
   };
-  console.log(names);
-
   return (
     <div className="App">
-      <NameList {...{ names, setSelectedIndex }} />
+      <NameList {...{ names, setSelectedIndex, selectedIndex }} />
 
       <input
         style={{ marginLeft: "22px" }}
+        value={middleName}
         onChange={(e) => {
           handleChange(e);
         }}
